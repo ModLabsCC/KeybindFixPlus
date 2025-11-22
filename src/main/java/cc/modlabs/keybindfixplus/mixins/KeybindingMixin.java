@@ -20,18 +20,18 @@ public abstract class KeybindingMixin {
     @Shadow private static Map<String, KeyBinding> keysById;
 
     @Final
-    @Shadow private static Map<InputUtil.Key, KeyBinding> keyToBindings;
+    @Shadow private static Map<InputUtil.KeyCode, KeyBinding> keysByCode;
 
-    @Shadow private InputUtil.Key boundKey;
+    @Shadow private InputUtil.KeyCode keyCode;
 
     @Inject(method = "onKeyPressed", at = @At(value = "TAIL"))
-    private static void onKeyPressedFixed(InputUtil.Key key, CallbackInfo ci, @Local KeyBinding original){
-        KeybindFixer.INSTANCE.onKeyPressed(key, original, keyToBindings.get(key));
+    private static void onKeyPressedFixed(InputUtil.KeyCode key, CallbackInfo ci, @Local KeyBinding original){
+        KeybindFixer.INSTANCE.onKeyPressed(key, original, keysByCode.get(key));
     }
 
     @Inject(method = "setKeyPressed", at = @At(value = "TAIL"))
-    private static void setKeyPressedFixed(InputUtil.Key key, boolean pressed, CallbackInfo ci, @Local KeyBinding original){
-        KeybindFixer.INSTANCE.setKeyPressed(key, pressed, original, keyToBindings.get(key));
+    private static void setKeyPressedFixed(InputUtil.KeyCode key, boolean pressed, CallbackInfo ci, @Local KeyBinding original){
+        KeybindFixer.INSTANCE.setKeyPressed(key, pressed, original, keysByCode.get(key));
     }
 
     @Inject(method = "updateKeysByCode", at = @At(value = "INVOKE",target = "Ljava/util/Map;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"))
@@ -44,7 +44,7 @@ public abstract class KeybindingMixin {
 
     @Inject(method = "<init>(Ljava/lang/String;Lnet/minecraft/client/util/InputUtil$Type;ILjava/lang/String;)V", at = @At(value = "TAIL"))
     private void putToMultiMap(String translationKey, InputUtil.Type type, int code, String category, CallbackInfo ci){
-        KeybindFixer.INSTANCE.putKey(boundKey, (KeyBinding) (Object) this);
+        KeybindFixer.INSTANCE.putKey(keyCode, (KeyBinding) (Object) this);
     }
 
 }

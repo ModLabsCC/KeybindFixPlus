@@ -7,6 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(KeyBinding.class)
 public interface BoundKeyAccessor {
-    @Accessor(value = "boundKey")
-    InputUtil.Key getBoundKey();
+    @Accessor(value = "keyCode")
+    InputUtil.KeyCode getBoundKey();
 }

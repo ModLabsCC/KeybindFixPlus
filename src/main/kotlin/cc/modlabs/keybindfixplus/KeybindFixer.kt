@@ -8,9 +8,9 @@ import net.minecraft.client.util.InputUtil
 
 object KeybindFixer {
 
-    private val keyFixMap: Multimap<InputUtil.Key,KeyBinding> = ArrayListMultimap.create()
+    private val keyFixMap: Multimap<InputUtil.KeyCode,KeyBinding> = ArrayListMultimap.create()
 
-    fun putKey(key: InputUtil.Key, keyBinding: KeyBinding)
+    fun putKey(key: InputUtil.KeyCode, keyBinding: KeyBinding)
     {
         keyFixMap.put(key, keyBinding)
     }
@@ -20,7 +20,7 @@ object KeybindFixer {
         keyFixMap.clear()
     }
 
-    fun onKeyPressed(key: InputUtil.Key, finalBinding: KeyBinding?, baseBinding: KeyBinding?)
+    fun onKeyPressed(key: InputUtil.KeyCode, finalBinding: KeyBinding?, baseBinding: KeyBinding?)
     {
         if (finalBinding == null || baseBinding == null || finalBinding !== baseBinding) return
         for (theKey in keyFixMap[key])
@@ -30,7 +30,7 @@ object KeybindFixer {
         }
     }
 
-    fun setKeyPressed(key: InputUtil.Key, pressed: Boolean, finalBinding: KeyBinding?, baseBinding: KeyBinding?)
+    fun setKeyPressed(key: InputUtil.KeyCode, pressed: Boolean, finalBinding: KeyBinding?, baseBinding: KeyBinding?)
     {
         if (finalBinding == null || baseBinding == null || finalBinding !== baseBinding) return
         for (theKey in keyFixMap[key])
