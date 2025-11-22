@@ -1,6 +1,6 @@
 pluginManagement {
     repositories {
-        maven("https://nexus.flawcra.cc/repository/maven-mirrors/") { name = "FlawCra" }
+        maven("https://nexus.modlabs.cc/repository/maven-mirrors/") { name = "ModLabs" }
     }
     plugins {
         val loom_version: String by settings
