@@ -3,7 +3,7 @@ package cc.modlabs.keybindfixplus
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
 import cc.modlabs.keybindfixplus.mixins.TimesPressedAccessor
-import net.minecraft.client.option.KeyBinding
+import net.minecraft.client.options.KeyBinding
 import net.minecraft.client.util.InputUtil
 
 object KeybindFixer {

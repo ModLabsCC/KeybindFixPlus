@@ -2,7 +2,7 @@ package cc.modlabs.keybindfixplus.mixins;
 
 import cc.modlabs.keybindfixplus.KeybindFixer;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
