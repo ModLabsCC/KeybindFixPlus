@@ -36,7 +36,7 @@ object KeybindFixer {
         for (theKey in keyFixMap[key])
         {
             if (theKey == null || theKey === baseBinding) continue
-            theKey.isPressed = pressed
+            theKey.pressed = pressed
         }
     }
 }

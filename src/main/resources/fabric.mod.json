@@ -20,6 +20,7 @@
   "mixins": [
     "keybindfixplus.mixins.json"
   ],
+  "accessWidener": "keybindfixplus.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",

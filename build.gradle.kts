@@ -15,6 +15,11 @@ group = maven_group
 repositories {
 
 }
+
+loom {
+    accessWidenerPath = file("src/main/resources/keybindfixplus.accesswidener")
+}
+
 dependencies {
     val minecraft_version: String by project
     minecraft("com.mojang:minecraft:$minecraft_version")
