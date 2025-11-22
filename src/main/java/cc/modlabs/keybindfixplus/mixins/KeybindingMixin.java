@@ -17,27 +17,27 @@ import java.util.Map;
 public abstract class KeybindingMixin {
 
     @Final
-    @Shadow private static Map<String, KeyBinding> KEYS_BY_ID;
+    @Shadow private static Map<String, KeyBinding> keysById;
 
     @Final
-    @Shadow private static Map<InputUtil.Key, KeyBinding> KEY_TO_BINDINGS;
+    @Shadow private static Map<InputUtil.Key, KeyBinding> keyToBindings;
 
     @Shadow private InputUtil.Key boundKey;
 
     @Inject(method = "onKeyPressed", at = @At(value = "TAIL"))
     private static void onKeyPressedFixed(InputUtil.Key key, CallbackInfo ci, @Local KeyBinding original){
-        KeybindFixer.INSTANCE.onKeyPressed(key, original, KEY_TO_BINDINGS.get(key));
+        KeybindFixer.INSTANCE.onKeyPressed(key, original, keyToBindings.get(key));
     }
 
     @Inject(method = "setKeyPressed", at = @At(value = "TAIL"))
     private static void setKeyPressedFixed(InputUtil.Key key, boolean pressed, CallbackInfo ci, @Local KeyBinding original){
-        KeybindFixer.INSTANCE.setKeyPressed(key, pressed, original, KEY_TO_BINDINGS.get(key));
+        KeybindFixer.INSTANCE.setKeyPressed(key, pressed, original, keyToBindings.get(key));
     }
 
     @Inject(method = "updateKeysByCode", at = @At(value = "INVOKE",target = "Ljava/util/Map;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"))
     private static void updateByCodeToMultiMap(CallbackInfo ci) {
         KeybindFixer.INSTANCE.clearMap();
-        for (KeyBinding keyBinding : KEYS_BY_ID.values()) {
+        for (KeyBinding keyBinding : keysById.values()) {
             KeybindFixer.INSTANCE.putKey(((BoundKeyAccessor) keyBinding).getBoundKey(),keyBinding);
         }
     }
